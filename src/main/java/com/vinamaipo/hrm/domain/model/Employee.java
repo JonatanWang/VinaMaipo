@@ -31,5 +31,5 @@ public class Employee implements Serializable {
     private String name;
 
     @Nullable
-    private Set<ObjectId> customersId = new HashSet<>();
+    private Set<ObjectId> customerIds = new HashSet<>();
 }

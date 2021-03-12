@@ -4,7 +4,6 @@ import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -28,5 +27,5 @@ public class Customer implements Serializable {
 
     private String name;
 
-    private Set<Employee> employeesId = new HashSet<>();
+    private Set<ObjectId> employeeIds = new HashSet<>();
 }

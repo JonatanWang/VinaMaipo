@@ -1,4 +1,4 @@
-package com.vinamaipo.hrm.repos;
+package com.vinamaipo.hrm.repository;
 
 import com.vinamaipo.hrm.domain.model.Employee;
 import org.springframework.data.mongodb.repository.MongoRepository;
