@@ -1,24 +1,49 @@
-version: "3.3"
+version: "3.6"
+
 services:
   mongo:
     image: mongo
-    container_name: "vinamaipo-db"
     ports:
       - "27017:27017"
     environment:
-      # provide your credentials here
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=pass
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
     volumes:
-    - "./mongo-data:/data/db"
+      - "./mongo-data:/data/db"
 
   mongo-express:
     image: mongo-express
     restart: always
     ports:
-      - "8081:8081"
+      - "8087:8087"
     environment:
+      VCAP_APP_PORT: 8087
+      ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+      WAIT_HOSTS: "mongo:27017"
+      WAIT_HOSTS_TIMEOUT: 60
+      WAIT_SLEEP_INTERVAL: 3
+      WAIT_AFTER_HOSTS: 10
+    volumes:
+      - ./docker:/tmp/docker
+    command: "bash -c 'chmod +x /tmp/docker/docker-compose-wait-2.8.0 && /tmp/docker/docker-compose-wait-2.8.0 && /docker-entrypoint.sh'"
     depends_on:
       - mongo
+
+  app:
+    build: .
+    image: vinamaipo:local
+    restart: always
+    ports:
+      - "8080:8080"
+    # depends_on:
+    #   - mongo
+    volumes:
+      - .:/app
+    environment:
+      SPRING_BOOT_MONGODB_HOST: host.docker.internal
+      WAIT_HOSTS: "mongo:27017"
+      WAIT_HOSTS_TIMEOUT: 60
+      WAIT_SLEEP_INTERVAL: 3
+      WAIT_AFTER_HOSTS: 1

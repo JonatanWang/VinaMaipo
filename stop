@@ -1,0 +1,42 @@
+#!/bin/bash
+
+TARGET=$1
+
+case $TARGET in
+
+  docker-all)
+    docker-compose down
+    IDS=$(docker ps -q --filter status=exited)
+    test -n "$IDS" && docker rm "$IDS"
+    docker ps -a
+    ;;
+
+  docker-db)
+    docker-compose down mongo mongo-express
+    IDS=$(docker ps -q --filter status=exited)
+    test -n "$IDS" && docker rm "$IDS"
+    docker ps -a
+    ;;
+
+  docker-app)
+    docker-compose down app
+    IDS=$(docker ps -q --filter status=exited)
+    test -n "$IDS" && docker rm "$IDS"
+    docker ps -a
+    ;;
+
+  *)
+    echo
+    if test "$TARGET" == ""; then
+      echo "Missing target"
+    else
+      echo "Unknown target: $TARGET"
+    fi
+    echo
+    echo "Valid targets:  docker-all"
+    echo "                docker-db"
+    echo "                docker-app"
+    exit 1
+    ;;
+
+esac

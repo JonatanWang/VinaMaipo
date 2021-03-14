@@ -1,0 +1,50 @@
+#!/bin/bash
+
+TARGET=$1
+
+case $TARGET in
+
+  app)
+    mvn spring-boot:run
+    ;;
+
+  docker-all)
+    docker-compose up --build -d || exit 1
+    docker-compose logs -tf
+    docker ps -a
+    ;;
+
+  docker-db)
+    docker-compose up -d mongo mongo-express || exit 1
+    docker-compose logs -tf mongo mongo-express
+    docker ps -a
+    ;;
+
+  docker-app)
+    docker-compose up --build -d app || exit 1
+    docker-compose logs -tf app
+    docker ps -a
+    ;;
+
+  docker-bash)
+    docker build --tag vinamaipo:local --progress plain . || exit 1
+    docker run -it --mount "type=bind,src=$PWD,dst=/app" vinamaipo:local bash
+    ;;
+
+  *)
+    echo
+    if test "$TARGET" == ""; then
+      echo "Missing target"
+    else
+      echo "Unknown target: $TARGET"
+    fi
+    echo
+    echo "Valid targets:  app"
+    echo "                docker-all"
+    echo "                docker-db"
+    echo "                docker-app"
+    echo "                docker-bash"
+    exit 1
+    ;;
+
+esac

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+TARGET=$1
+
+case $TARGET in
+
+  docker-all)
+    docker-compose restart || exit 1
+    docker-compose logs -tf
+    ;;
+
+  docker-db)
+    docker-compose restart mongo mongo-express || exit 1
+    docker-compose logs -tf mongo mongo-express
+    ;;
+
+  docker-app)
+    docker-compose restart app || exit 1
+    docker-compose logs -tf app
+    ;;
+
+  *)
+    echo
+    if test "$TARGET" == ""; then
+      echo "Missing target"
+    else
+      echo "Unknown target: $TARGET"
+    fi
+    echo
+    echo "Valid targets:  docker-all"
+    echo "                docker-db"
+    echo "                docker-app"
+    exit 1
+    ;;
+
+esac
