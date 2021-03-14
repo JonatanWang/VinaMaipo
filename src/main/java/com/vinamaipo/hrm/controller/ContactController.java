@@ -1,7 +1,7 @@
 package com.vinamaipo.hrm.controller;
 
-import com.vinamaipo.hrm.domain.model.Employee;
-import com.vinamaipo.hrm.repository.EmployeeRepo;
+import com.vinamaipo.hrm.domain.model.Contact;
+import com.vinamaipo.hrm.repository.ContactRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,19 +14,19 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1")
-public class EmployeeController {
+public class ContactController {
 
     @Autowired
-    private final EmployeeRepo employeeRepo;
+    private final ContactRepo contactRepo;
 
-    public EmployeeController(EmployeeRepo employeeRepo) {
-        this.employeeRepo = employeeRepo;
+    public ContactController(ContactRepo contactRepo) {
+        this.contactRepo = contactRepo;
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Contact> saveEmployee(@RequestBody Contact contact) {
         try {
-            var _employee =  employeeRepo.save(employee);
+            var _employee =  contactRepo.save(contact);
 
             return new ResponseEntity<>(_employee, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -35,22 +35,22 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
-        var employeeData = employeeRepo.findById(id);
+    public ResponseEntity<Contact> getEmployeeById(@PathVariable("id") String id) {
+        var employeeData = contactRepo.findById(id);
 
         return employeeData.isPresent() ? new ResponseEntity<>(employeeData.get(), HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> findAllEmployees(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Contact>> findAllEmployees(@RequestParam(required = false) String name) {
         try {
-            var employees = new ArrayList<Employee>();
+            var employees = new ArrayList<Contact>();
 
             if (name == null)
-                employeeRepo.findAll().forEach(employees::add);
+                contactRepo.findAll().forEach(employees::add);
             else
-                employeeRepo.findByNameContaining(name).forEach(employees::add);
+                contactRepo.findByNameContaining(name).forEach(employees::add);
 
             if (employees.isEmpty()) {
 
@@ -65,14 +65,14 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String id, @RequestBody Employee employee) {
-        var employeeData = employeeRepo.findById(id);
+    public ResponseEntity<Contact> updateEmployee(@PathVariable("id") String id, @RequestBody Contact contact) {
+        var employeeData = contactRepo.findById(id);
         if (employeeData.isPresent()) {
             var _employee = employeeData.get();
-            _employee.setName(employee.getName());
-            _employee.setCustomer(employee.getCustomer());
+            _employee.setName(contact.getName());
+            _employee.setAddress(contact.getAddress());
 
-            return new ResponseEntity<>(employeeRepo.save(_employee), HttpStatus.OK);
+            return new ResponseEntity<>(contactRepo.save(_employee), HttpStatus.OK);
         } else {
 
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -82,7 +82,7 @@ public class EmployeeController {
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") String id) {
         try {
-            employeeRepo.deleteById(id);
+            contactRepo.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class EmployeeController {
     @DeleteMapping("/employees")
     public ResponseEntity<HttpStatus> deleteAllEmployees() {
         try {
-            employeeRepo.deleteAll();
+            contactRepo.deleteAll();
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {

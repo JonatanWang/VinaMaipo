@@ -1,5 +1,7 @@
 package com.vinamaipo.hrm.domain.model;
 
+import com.mongodb.lang.Nullable;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.*;
@@ -9,9 +11,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Document(collection = "employees")
 @Data
-@Document(collection = "customers")
-public class Customer implements Serializable {
+@Builder
+public class Contact implements Serializable {
 
     @Id
     private ObjectId id;
@@ -23,9 +26,10 @@ public class Customer implements Serializable {
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
-    private LocalDateTime modifiedAt;
+    private  LocalDateTime modifiedAt;
 
     private String name;
 
-    private Set<ObjectId> employeeIds = new HashSet<>();
+    @Nullable
+    private Set<ObjectId> customerIds = new HashSet<>();
 }
