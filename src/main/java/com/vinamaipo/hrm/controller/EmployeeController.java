@@ -1,7 +1,7 @@
 package com.vinamaipo.hrm.controller;
 
 import com.vinamaipo.hrm.domain.model.Employee;
-import com.vinamaipo.hrm.repository.EmployeeService;
+import com.vinamaipo.hrm.repository.EmployeeRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +17,16 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private final EmployeeService employeeService;
+    private final EmployeeRepo employeeRepo;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(EmployeeRepo employeeRepo) {
+        this.employeeRepo = employeeRepo;
     }
 
     @PostMapping("/employees")
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
         try {
-            var _employee =  employeeService.save(employee);
+            var _employee =  employeeRepo.save(employee);
 
             return new ResponseEntity<>(_employee, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class EmployeeController {
 
     @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
-        var employeeData = employeeService.findById(id);
+        var employeeData = employeeRepo.findById(id);
 
         return employeeData.isPresent() ? new ResponseEntity<>(employeeData.get(), HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -48,9 +48,9 @@ public class EmployeeController {
             var employees = new ArrayList<Employee>();
 
             if (name == null)
-                employeeService.findAll().forEach(employees::add);
+                employeeRepo.findAll().forEach(employees::add);
             else
-                employeeService.findByNameContaining(name).forEach(employees::add);
+                employeeRepo.findByNameContaining(name).forEach(employees::add);
 
             if (employees.isEmpty()) {
 
@@ -66,13 +66,13 @@ public class EmployeeController {
 
     @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String id, @RequestBody Employee employee) {
-        var employeeData = employeeService.findById(id);
+        var employeeData = employeeRepo.findById(id);
         if (employeeData.isPresent()) {
             var _employee = employeeData.get();
             _employee.setName(employee.getName());
             _employee.setCustomer(employee.getCustomer());
 
-            return new ResponseEntity<>(employeeService.save(_employee), HttpStatus.OK);
+            return new ResponseEntity<>(employeeRepo.save(_employee), HttpStatus.OK);
         } else {
 
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -82,7 +82,7 @@ public class EmployeeController {
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") String id) {
         try {
-            employeeService.deleteById(id);
+            employeeRepo.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class EmployeeController {
     @DeleteMapping("/employees")
     public ResponseEntity<HttpStatus> deleteAllEmployees() {
         try {
-            employeeService.deleteAll();
+            employeeRepo.deleteAll();
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {

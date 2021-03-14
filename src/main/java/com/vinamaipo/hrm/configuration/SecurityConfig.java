@@ -1,4 +1,4 @@
-package com.vinamaipo.hrm.config;
+package com.vinamaipo.hrm.configuration;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
