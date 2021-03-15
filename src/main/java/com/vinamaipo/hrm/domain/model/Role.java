@@ -11,8 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 public class Role implements GrantedAuthority {
 
     public static final String USER_ADMIN = "USER_ADMIN";
-    public static final String EMPLOYEE_ADMIN = "EMPLOYEE_ADMIN";
-    public static final String CUSTOMER_ADMIN = "CUSTOMER_ADMIN";
+    public static final String CONTACT_ADMIN = "CONTACT_ADMIN";
+    public static final String ADDRESS_ADMIN = "ADDRESS_ADMIN";
 
     public String authority;
 }

@@ -22,7 +22,7 @@ import java.util.List;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Repository
-public interface AddressRepo extends MongoRepository<Address, ObjectId>, BookRepoCustom {
+public interface AddressRepo extends MongoRepository<Address, ObjectId>, AddressRepoCustom {
 
     default Address getById(ObjectId id) {
         return findById(id).orElseThrow(() -> new NotFoundException(Address.class, id));
@@ -32,19 +32,19 @@ public interface AddressRepo extends MongoRepository<Address, ObjectId>, BookRep
 
 }
 
-interface BookRepoCustom {
+interface AddressRepoCustom {
 
-    List<Address> searchBooks(Page page, SearchAddressesQuery query);
+    List<Address> searchAddresses(Page page, SearchAddressesQuery query);
 
 }
 
 @RequiredArgsConstructor
-class BookRepoCustomImpl implements BookRepoCustom {
+class AddressRepoCustomImpl implements AddressRepoCustom {
 
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public List<Address> searchBooks(Page page, SearchAddressesQuery query) {
+    public List<Address> searchAddresses(Page page, SearchAddressesQuery query) {
         List<AggregationOperation> operations = new ArrayList<>();
 
         List<Criteria> criteriaList = new ArrayList<>();
@@ -77,10 +77,10 @@ class BookRepoCustomImpl implements BookRepoCustom {
             criteriaList.add(Criteria.where("contact.name").regex(query.getContactName(), "i"));
         }
         if (!criteriaList.isEmpty()) {
-            Criteria authorCriteria = new Criteria().andOperator(criteriaList.toArray(new Criteria[0]));
+            Criteria contactCriteria = new Criteria().andOperator(criteriaList.toArray(new Criteria[0]));
             operations.add(lookup("contacts", "contactIds", "_id", "contact"));
             operations.add(unwind("contact", false));
-            operations.add(match(authorCriteria));
+            operations.add(match(contactCriteria));
         }
 
         operations.add(sort(Sort.Direction.DESC, "createdAt"));

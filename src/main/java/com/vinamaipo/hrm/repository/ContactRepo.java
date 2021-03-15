@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public interface ContactRepo extends MongoRepository<Contact, ObjectId> {
+public interface ContactRepo extends MongoRepository<Contact, ObjectId>, ContactRepoCustom {
 
     public List<Contact> findByNameContaining(String name);
 

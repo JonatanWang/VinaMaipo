@@ -6,10 +6,9 @@ import com.vinamaipo.hrm.repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = ObjectIdMapper.class)
+@Mapper(componentModel = "spring", uses = {ObjectIdMapper.class})
 public abstract class UserViewMapper {
 
     @Autowired

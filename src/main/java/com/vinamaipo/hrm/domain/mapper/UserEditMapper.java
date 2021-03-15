@@ -5,13 +5,11 @@ import com.vinamaipo.hrm.domain.dto.UpdateUserRequest;
 import com.vinamaipo.hrm.domain.model.Role;
 import com.vinamaipo.hrm.domain.model.User;
 import org.mapstruct.*;
-
-import javax.management.relation.RoleStatus;
-import java.util.stream.Collectors;
+import org.springframework.context.annotation.Bean;
 
 import static java.util.stream.Collectors.toSet;
 
-@Mapper(componentModel = "spring", uses = ObjectIdMapper.class)
+@Mapper(componentModel = "spring", uses = {ObjectIdMapper.class})
 public abstract class UserEditMapper {
 
     @Mapping(target = "authorities", ignore = true)
