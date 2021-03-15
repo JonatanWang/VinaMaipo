@@ -18,7 +18,7 @@ import java.util.Set;
 public class User implements UserDetails, Serializable {
 
     @Id
-    private ObjectId objectId;
+    private ObjectId id;
 
     @CreatedDate
     private LocalDateTime createdAt;
