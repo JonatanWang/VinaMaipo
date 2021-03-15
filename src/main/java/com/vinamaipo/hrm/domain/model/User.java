@@ -30,8 +30,9 @@ public class User implements UserDetails, Serializable {
     @Indexed(unique = true)
     private String username;
     private String password;
+
     @Indexed
-    private String fullname;
+    private String fullName;
     private Set<Role> authorities = new HashSet<>();
 
     public User() {}
@@ -44,16 +45,16 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return enabled;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return enabled;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return enabled;
     }
 }
