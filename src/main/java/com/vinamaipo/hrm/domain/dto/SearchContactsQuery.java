@@ -9,7 +9,7 @@ public class SearchContactsQuery {
 
     private String id;
 
-    private String createdId;
+    private String creatorId;
     private LocalDateTime createdAtStart;
     private LocalDateTime createdAtEnd;
 

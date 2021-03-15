@@ -20,9 +20,9 @@ public class Contact implements Serializable {
     private ObjectId id;
 
     @CreatedBy
-    private ObjectId createdBy;
+    private ObjectId creatorId;
     @LastModifiedBy
-    private ObjectId modifiedBy;
+    private ObjectId modifierId;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
