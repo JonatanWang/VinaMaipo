@@ -31,5 +31,5 @@ public class Contact implements Serializable {
     private String name;
 
     @Nullable
-    private Set<ObjectId> customerIds = new HashSet<>();
+    private Set<ObjectId> addressIds = new HashSet<>();
 }

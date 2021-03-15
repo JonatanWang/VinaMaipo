@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Document(collection = "customers")
+@Document(collection = "adresses")
 public class Address implements Serializable {
 
     @Id
@@ -25,7 +25,8 @@ public class Address implements Serializable {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    private String name;
+    private String street;
+    private String label;
 
-    private Set<ObjectId> employeeIds = new HashSet<>();
+    private Set<ObjectId> contactIds = new HashSet<>();
 }
