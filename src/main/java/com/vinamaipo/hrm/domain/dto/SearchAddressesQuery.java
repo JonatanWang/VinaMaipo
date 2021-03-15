@@ -10,7 +10,7 @@ public class SearchAddressesQuery {
 
     private String creatorId;
     private LocalDateTime createdAtStart;
-    private LocalDateTime createAtEnd;
+    private LocalDateTime createdAtEnd;
 
     private String street;
 

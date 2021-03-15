@@ -1,10 +1,11 @@
 package com.vinamaipo.hrm.domain.mapper;
 
 import com.vinamaipo.hrm.domain.dto.UserView;
+import com.vinamaipo.hrm.domain.model.User;
+import com.vinamaipo.hrm.repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
