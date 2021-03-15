@@ -70,7 +70,7 @@ public class ContactController {
         if (contactData.isPresent()) {
             var _contact = contactData.get();
             _contact.setName(contact.getName());
-            _contact.setAddress(contact.getAddress());
+            _contact.setAddressIds(contact.getAddressIds());
 
             return new ResponseEntity<>(contactRepo.save(_contact), HttpStatus.OK);
         } else {
