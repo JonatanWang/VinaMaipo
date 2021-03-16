@@ -17,5 +17,6 @@
 ![Swagger](https://img.shields.io/badge/swagger-svg?longCache=true&style=for-the-badge)
 ![SpringBoot](https://img.shields.io/badge/springboot-svg?longCache=true&style=for-the-badge)
 ![Java](https://img.shields.io/badge/java.11-svg?longCache=true&style=for-the-badge)
+![Docker](https://img.shields.io/badge/docker-blue.svg?longCache=true&style=for-the-badge)
 
 A Single Page Application(SPA) that visualizes where the users' contacts and the corresponding addresses of the contacts.
