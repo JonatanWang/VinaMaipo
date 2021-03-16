@@ -101,7 +101,15 @@ public class UserService implements UserDetailsService {
     }
 
     public List<UserView> searchUsers(Page page, SearchUsersQuery query) {
+
         List<User> users = userRepo.searchUsers(page, query);
+
+        return userViewMapper.toUserView(users);
+    }
+
+    public List<UserView> searchUsers(Page page) {
+
+        List<User> users = userRepo.searchUsers(page);
 
         return userViewMapper.toUserView(users);
     }

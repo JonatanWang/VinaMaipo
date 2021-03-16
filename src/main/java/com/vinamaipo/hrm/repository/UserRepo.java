@@ -60,13 +60,12 @@ public interface UserRepo extends UserRepoCustom, MongoRepository<User, ObjectId
 
     @Cacheable
     Optional<User> findByUsername(String username);
-
 }
 
 interface UserRepoCustom {
 
     List<User> searchUsers(Page page, SearchUsersQuery query);
-
+    List<User> searchUsers(Page page);
 }
 
 @RequiredArgsConstructor
@@ -93,6 +92,21 @@ class UserRepoCustomImpl implements UserRepoCustom {
             operations.add(match(userCriteria));
         }
 
+        operations.add(sort(Sort.Direction.DESC, "createdAt"));
+        operations.add(skip((page.getNumber() - 1) * page.getLimit()));
+        operations.add(limit(page.getLimit()));
+
+        TypedAggregation<User> aggregation = newAggregation(User.class, operations);
+        AggregationResults<User> results = mongoTemplate.aggregate(aggregation, User.class);
+
+        return results.getMappedResults();
+    }
+
+    @Override
+    public List<User> searchUsers(Page page) {
+
+        List<AggregationOperation> operations = new ArrayList<>();
+        List<Criteria> criteriaList = new ArrayList<>();
         operations.add(sort(Sort.Direction.DESC, "createdAt"));
         operations.add(skip((page.getNumber() - 1) * page.getLimit()));
         operations.add(limit(page.getLimit()));

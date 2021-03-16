@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @Tag(name = "UserAdmin")
 @RestController @RequestMapping(path = "api/v1/admin/user")
@@ -48,5 +49,10 @@ public class UserAdminApi {
     @PostMapping("search")
     public ListResponse<UserView> search(@RequestBody SearchRequest<SearchUsersQuery> request) {
         return new ListResponse<>(userService.searchUsers(request.getPage(), request.getQuery()));
+    }
+
+    @GetMapping("all")
+    public ListResponse<UserView> getAllUsers() {
+        return new ListResponse<>(userService.searchUsers(new Page()));
     }
 }

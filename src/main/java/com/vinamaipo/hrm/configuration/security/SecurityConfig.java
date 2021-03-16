@@ -100,10 +100,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(format("%s/**", swaggerPath)).permitAll()
                 // Public endpoints
                 .antMatchers("/api/v1/public/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/contacts/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/contacts/search").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/addresses/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/addresses/search").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/contact/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/contact/search").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/address/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/address/search").permitAll()
                 // Private endpoints
                 .anyRequest().authenticated();
 
