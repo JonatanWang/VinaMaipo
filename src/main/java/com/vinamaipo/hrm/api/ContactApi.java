@@ -21,7 +21,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Tag(name = "Contact")
-@RestController @RequestMapping(path = "api/author")
+@RestController @RequestMapping(path = "api/v1/contact")
 @RequiredArgsConstructor
 public class ContactApi {
 
