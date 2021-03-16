@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.validation.ValidationException;
 import java.util.HashSet;
 import java.util.List;
@@ -26,8 +25,8 @@ import static java.lang.String.format;
 public class UserService implements UserDetailsService {
 
     private final UserRepo userRepo;
-    private final UserViewMapper userViewMapper;
     private final UserEditMapper userEditMapper;
+    private final UserViewMapper userViewMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional

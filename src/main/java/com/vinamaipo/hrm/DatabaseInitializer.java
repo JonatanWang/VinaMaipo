@@ -13,14 +13,14 @@ import java.util.Set;
 public class DatabaseInitializer implements ApplicationListener<ApplicationReadyEvent> {
 
     private final List<String> usernames = List.of(
-            "ada.lovelace@nix.io",
-            "alan.turing@nix.io",
-            "dennis.ritchie@nix.io"
+            "par.tjarnberg@cygni.se",
+            "alexander.urban@cygni.se",
+            "zhengyu.wang@cygni.se"
     );
     private final List<String> fullNames = List.of(
-            "Ada Lovelace",
-            "Alan Turing",
-            "Dennis Ritchie"
+            "Pär Tjärnberg",
+            "Alexander Urban",
+            "Zhengyu Wang"
     );
     private final List<String> roles = List.of(
             Role.USER_ADMIN,
@@ -28,7 +28,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             Role.ADDRESS_ADMIN
     );
 
-    private final String password = "Test12345_";
+    private final String password = "pass";
 
     private final UserService userService;
 
@@ -38,7 +38,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        for (int i = 0; i < usernames.size(); ++i) {
+        for (int i = 0; i < usernames.size(); ++ i) {
             CreateUserRequest request = new CreateUserRequest();
             request.setUsername(usernames.get(i));
             request.setFullName(fullNames.get(i));

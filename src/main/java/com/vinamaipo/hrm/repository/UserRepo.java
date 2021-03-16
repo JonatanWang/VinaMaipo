@@ -24,10 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.limit;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.skip;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 
-@Repository
-@CacheConfig(cacheNames = "users")
+
+@Repository @CacheConfig(cacheNames = "users")
 public interface UserRepo extends UserRepoCustom, MongoRepository<User, ObjectId> {
 
     @CacheEvict(allEntries = true)
@@ -60,7 +64,9 @@ public interface UserRepo extends UserRepoCustom, MongoRepository<User, ObjectId
 }
 
 interface UserRepoCustom {
+
     List<User> searchUsers(Page page, SearchUsersQuery query);
+
 }
 
 @RequiredArgsConstructor

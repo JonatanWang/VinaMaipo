@@ -15,10 +15,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Repository

@@ -18,9 +18,10 @@ public abstract class UserViewMapper {
 
     public abstract List<UserView> toUserView(List<User> users);
 
-    public UserView toUserViewById(ObjectId objectId) {
-
-        return objectId == null ?
-                null : toUserView(userRepo.getById(objectId));
+    public UserView toUserViewById(ObjectId id) {
+        if (id == null) {
+            return null;
+        }
+        return toUserView(userRepo.getById(id));
     }
 }
