@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Document(collection = "employees")
+@Document(collection = "contacts")
 @Data
 @Builder
 public class Contact implements Serializable {
