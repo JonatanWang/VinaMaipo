@@ -7,7 +7,7 @@ services:
       - "27017:27017"
     environment:
       # provide your credentials here
-      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_USERNAME=ada.lovelace@nix.io
       - MONGO_INITDB_ROOT_PASSWORD=pass
     volumes:
     - "./mongo-data:/data/db"
