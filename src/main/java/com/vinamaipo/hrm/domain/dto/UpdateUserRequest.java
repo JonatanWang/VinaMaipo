@@ -10,6 +10,5 @@ public class UpdateUserRequest {
 
     @NotBlank
     private String fullName;
-
     private Set<String> authorities;
 }

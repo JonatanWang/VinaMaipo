@@ -8,6 +8,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -29,6 +31,9 @@ public class User implements UserDetails, Serializable {
 
     @Indexed(unique = true)
     private String username;
+    @Indexed(unique = true)
+    @Email
+    private String email;
     private String password;
 
     @Indexed
@@ -37,8 +42,9 @@ public class User implements UserDetails, Serializable {
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
         this.enabled = true;
     }

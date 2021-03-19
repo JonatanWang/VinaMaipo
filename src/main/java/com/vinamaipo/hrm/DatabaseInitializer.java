@@ -17,6 +17,12 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             "alexander.urban@cygni.se",
             "zhengyu.wang@cygni.se"
     );
+
+    private final List<String> emails = List.of(
+            "partjarnberg",
+            "alexanderurban",
+            "zhengyuwang"
+    );
     private final List<String> fullNames = List.of(
             "Pär Tjärnberg",
             "Alexander Urban",
@@ -41,6 +47,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
         for (int i = 0; i < usernames.size(); ++ i) {
             CreateUserRequest request = new CreateUserRequest();
             request.setUsername(usernames.get(i));
+            request.setEmail(emails.get(i));
             request.setFullName(fullNames.get(i));
             request.setPassword(password);
             request.setRePassword(password);

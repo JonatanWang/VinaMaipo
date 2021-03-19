@@ -84,6 +84,9 @@ class UserRepoCustomImpl implements UserRepoCustom {
         if (!StringUtils.isEmpty(query.getUsername())) {
             criteriaList.add(Criteria.where("username").regex(query.getUsername(), "i"));
         }
+        if (!StringUtils.isEmpty(query.getEmail())) {
+            criteriaList.add(Criteria.where("email").regex(query.getEmail(), "i"));
+        }
         if (!StringUtils.isEmpty(query.getFullName())) {
             criteriaList.add(Criteria.where("fullName").regex(query.getFullName(), "i"));
         }
