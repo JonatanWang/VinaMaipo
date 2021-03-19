@@ -109,7 +109,7 @@ class UserRepoCustomImpl implements UserRepoCustom {
     public List<User> searchUsers(Page page) {
 
         List<AggregationOperation> operations = new ArrayList<>();
-        List<Criteria> criteriaList = new ArrayList<>();
+
         operations.add(sort(Sort.Direction.DESC, "createdAt"));
         operations.add(skip((page.getNumber() - 1) * page.getLimit()));
         operations.add(limit(page.getLimit()));
