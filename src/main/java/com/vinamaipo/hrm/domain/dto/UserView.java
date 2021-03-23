@@ -11,5 +11,5 @@ public class UserView {
     private String username;
     @Email
     private String email;
-    private String fullName;
+    private String fullname;
 }

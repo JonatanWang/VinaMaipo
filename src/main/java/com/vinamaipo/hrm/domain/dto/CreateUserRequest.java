@@ -1,5 +1,6 @@
 package com.vinamaipo.hrm.domain.dto;
 
+import com.vinamaipo.hrm.domain.model.Role;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -15,15 +16,11 @@ public class CreateUserRequest {
     @NotBlank
     @Email
     private String email;
-
-    @NotBlank
-    private String fullName;
+    private String fullname;
 
     @NotBlank
     private String password;
 
-    @NotBlank
     private String rePassword;
-
     private Set<String> authorities;
 }

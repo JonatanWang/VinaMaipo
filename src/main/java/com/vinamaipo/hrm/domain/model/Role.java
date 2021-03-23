@@ -15,4 +15,5 @@ public class Role implements GrantedAuthority {
     public static final String ADDRESS_ADMIN = "ADDRESS_ADMIN";
 
     public String authority;
+
 }

@@ -82,7 +82,7 @@ public class TestAuthApi {
     public void testRegisterSuccess() throws Exception {
         var goodRequest = new CreateUserRequest();
         goodRequest.setUsername(String.format("test.user.%d@nix.com", currentTimeMillis()));
-        goodRequest.setFullName("Test User A");
+        goodRequest.setFullname("Test User A");
         goodRequest.setPassword(password);
         goodRequest.setRePassword(password);
 
@@ -95,7 +95,7 @@ public class TestAuthApi {
 
         var userView = fromJson(objectMapper, createResult.getResponse().getContentAsString(), UserView.class);
         assertNotNull(userView.getId(), "User id must not be null!");
-        assertEquals(goodRequest.getFullName(), userView.getFullName(), "User fullname  update isn't applied!");
+        assertEquals(goodRequest.getFullname(), userView.getFullname(), "User fullname  update isn't applied!");
     }
 
     @Test
