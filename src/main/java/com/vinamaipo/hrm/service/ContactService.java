@@ -69,5 +69,10 @@ public class ContactService {
 
         return contactViewMapper.toContactView(contactRepo.searchContacts(page, query));
     }
+
+    public List<ContactView> searchContacts(Page page) {
+
+        return contactViewMapper.toContactView(contactRepo.searchContacts(page));
+    }
 }
 

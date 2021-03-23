@@ -34,9 +34,11 @@ public class UserService implements UserDetailsService {
         if (userRepo.findByUsername(request.getUsername()).isPresent()) {
             throw new ValidationException("Username exists!");
         }
+
         if (!request.getPassword().equals(request.getRePassword())) {
             throw new ValidationException("Passwords don't match!");
         }
+
         if (request.getAuthorities() == null) {
             request.setAuthorities(new HashSet<>());
         }
@@ -67,7 +69,7 @@ public class UserService implements UserDetailsService {
             return create(request);
         } else {
             UpdateUserRequest updateUserRequest = new UpdateUserRequest();
-            updateUserRequest.setFullName(request.getFullName());
+            updateUserRequest.setFullname(request.getFullname());
 
             return update(optionalUser.get().getId(), updateUserRequest);
         }

@@ -7,5 +7,6 @@ public class SearchUsersQuery {
 
     private String id;
     private String username;
-    private String fullName;
+    private String email;
+    private String fullname;
 }

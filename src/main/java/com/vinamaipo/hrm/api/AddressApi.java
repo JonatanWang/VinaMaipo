@@ -19,7 +19,7 @@ public class AddressApi {
     private final AddressService addressService;
     private final ContactService contactService;
 
-    @RolesAllowed({Role.ADDRESS_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.ADDRESS_ADMIN, Role.CONTACT_ADMIN, Role.USER_ADMIN})
     @PostMapping
     public AddressView create(@RequestBody @Valid EditAddressRequest request) {
         return addressService.create(request);

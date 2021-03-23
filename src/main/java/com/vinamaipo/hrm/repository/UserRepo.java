@@ -84,8 +84,11 @@ class UserRepoCustomImpl implements UserRepoCustom {
         if (!StringUtils.isEmpty(query.getUsername())) {
             criteriaList.add(Criteria.where("username").regex(query.getUsername(), "i"));
         }
-        if (!StringUtils.isEmpty(query.getFullName())) {
-            criteriaList.add(Criteria.where("fullName").regex(query.getFullName(), "i"));
+        if (!StringUtils.isEmpty(query.getEmail())) {
+            criteriaList.add(Criteria.where("email").regex(query.getEmail(), "i"));
+        }
+        if (!StringUtils.isEmpty(query.getFullname())) {
+            criteriaList.add(Criteria.where("fullname").regex(query.getFullname(), "i"));
         }
         if (!criteriaList.isEmpty()) {
             Criteria userCriteria = new Criteria().andOperator(criteriaList.toArray(new Criteria[0]));
@@ -106,7 +109,7 @@ class UserRepoCustomImpl implements UserRepoCustom {
     public List<User> searchUsers(Page page) {
 
         List<AggregationOperation> operations = new ArrayList<>();
-        List<Criteria> criteriaList = new ArrayList<>();
+
         operations.add(sort(Sort.Direction.DESC, "createdAt"));
         operations.add(skip((page.getNumber() - 1) * page.getLimit()));
         operations.add(limit(page.getLimit()));

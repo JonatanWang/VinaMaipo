@@ -2,6 +2,7 @@ package com.vinamaipo.hrm.domain.model;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class Address implements Serializable {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
+    @UniqueElements
     private String street;
     private String label;
 

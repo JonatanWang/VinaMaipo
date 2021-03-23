@@ -60,4 +60,9 @@ public class ContactApi {
     public ListResponse<ContactView> search(@RequestBody @Valid SearchRequest<SearchContactsQuery> request) {
         return new ListResponse<>(contactService.searchContacts(request.getPage(), request.getQuery()));
     }
+
+    @GetMapping("all")
+    public ListResponse<ContactView> getAllContacts() {
+        return new ListResponse<>(contactService.searchContacts(new Page()));
+    }
 }
