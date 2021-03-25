@@ -1,7 +1,6 @@
 package com.vinamaipo.hrm.api;
 
 import com.vinamaipo.hrm.domain.dto.*;
-import com.vinamaipo.hrm.domain.model.Address;
 import com.vinamaipo.hrm.domain.model.Role;
 import com.vinamaipo.hrm.service.AddressService;
 import com.vinamaipo.hrm.service.ContactService;
@@ -28,19 +27,19 @@ public class ContactApi {
     private final ContactService contactService;
     private final AddressService addressService;
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
     @PostMapping
     public ContactView create(@RequestBody @Valid EditContactRequest request) {
         return contactService.create(request);
     }
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
     @PutMapping("{id}")
     public ContactView edit(@PathVariable String id, @RequestBody @Valid EditContactRequest request) {
         return contactService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
     @DeleteMapping("{id}")
     public ContactView delete(@PathVariable String id) {
         return contactService.delete(new ObjectId(id));

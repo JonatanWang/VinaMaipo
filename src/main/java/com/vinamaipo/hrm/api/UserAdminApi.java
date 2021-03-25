@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.util.List;
 
 @Tag(name = "UserAdmin")
 @RestController @RequestMapping(path = "api/v1/admin/user")
-@RolesAllowed(Role.USER_ADMIN)
+@RolesAllowed(Role.USER)
 @RequiredArgsConstructor
 public class UserAdminApi {
 

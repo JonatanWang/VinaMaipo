@@ -8,7 +8,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -25,6 +24,7 @@ public class User implements UserDetails, Serializable {
     private String username;
     @Indexed
     private String fullname;
+
     @Indexed(unique = true)
     @Email
     private String email;
@@ -48,28 +48,6 @@ public class User implements UserDetails, Serializable {
         this.password = password;
         this.enabled = true;
     }
-    /**
-    public User(String username, String email, String fullname, String password) {
-        this.username = username;
-        this.email = email;
-        this.fullname = fullname;
-        this.password = password;
-        this.enabled = true;
-    }
-
-
-    public User(String username, String email, String fullname, String password, String[] authorities) {
-        this.username = username;
-        this.email = email;
-        this.fullname = fullname;
-        this.password = password;
-        for (String s: authorities) {
-            System.out.println(s);
-            this.setAuthorities(Set.of(new Role(s)));
-        }
-        this.enabled = true;
-    }
-     */
 
     @Override
     public boolean isAccountNonExpired() {
@@ -85,5 +63,4 @@ public class User implements UserDetails, Serializable {
     public boolean isCredentialsNonExpired() {
         return enabled;
     }
-
 }

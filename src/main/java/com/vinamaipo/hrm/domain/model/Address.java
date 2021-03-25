@@ -2,9 +2,9 @@ package com.vinamaipo.hrm.domain.model;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,8 +26,15 @@ public class Address implements Serializable {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @UniqueElements
+    // Storgatan 8, 123 45, Stockholm, Sweden
     private String street;
+    private int number;
+    private String zip;
+    private String city;
+    private String province;
+    private String country;
+
+    // Home, Job, Favorite etc
     private String label;
 
     private Set<ObjectId> contactIds = new HashSet<>();

@@ -19,19 +19,19 @@ public class AddressApi {
     private final AddressService addressService;
     private final ContactService contactService;
 
-    @RolesAllowed({Role.ADDRESS_ADMIN, Role.CONTACT_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.USER})
     @PostMapping
     public AddressView create(@RequestBody @Valid EditAddressRequest request) {
         return addressService.create(request);
     }
 
-    @RolesAllowed({Role.ADDRESS_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.USER})
     @PutMapping("{id}")
     public AddressView edit(@PathVariable String id, @RequestBody @Valid EditAddressRequest request) {
         return addressService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed({Role.ADDRESS_ADMIN, Role.USER_ADMIN})
+    @RolesAllowed({Role.USER})
     @DeleteMapping("{id}")
     public AddressView delete(@PathVariable String id) {
         return addressService.delete(new ObjectId(id));

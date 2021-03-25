@@ -28,7 +28,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             "Zhengyu Wang"
     );
     private final List<String> roles = List.of(
-            Role.USER_ADMIN,
+            Role.USER,
             Role.CONTACT_ADMIN,
             Role.ADDRESS_ADMIN
     );
