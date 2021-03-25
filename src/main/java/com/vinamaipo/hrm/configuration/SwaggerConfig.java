@@ -9,9 +9,10 @@ import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
-@ConditionalOnProperty(prefix = "spring",value = {"profiles.active"},havingValue = "dev")
+//@ConditionalOnProperty(prefix = "spring",value = {"profiles.active"},havingValue = "dev")
 public class SwaggerConfig {
 
     @Bean
