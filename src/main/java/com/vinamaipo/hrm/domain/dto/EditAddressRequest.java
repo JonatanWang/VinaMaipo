@@ -12,4 +12,9 @@ public class EditAddressRequest {
 
     @NotBlank
     private String street;
+    private int number;
+    private String zip;
+    private String city;
+    private String province;
+    private String country;
 }

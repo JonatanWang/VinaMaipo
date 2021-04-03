@@ -1,5 +1,6 @@
 package com.vinamaipo.hrm.domain.model;
 
+import com.mongodb.lang.Nullable;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.*;
@@ -26,6 +27,9 @@ public class Address implements Serializable {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
+    // Home, Job, Favorite etc
+    private String label;
+
     // Storgatan 8, 123 45, Stockholm, Sweden
     private String street;
     private int number;
@@ -34,8 +38,8 @@ public class Address implements Serializable {
     private String province;
     private String country;
 
-    // Home, Job, Favorite etc
-    private String label;
-
-    private Set<ObjectId> contactIds = new HashSet<>();
+//    @Nullable
+//    private Set<ObjectId> contactIds = new HashSet<>();
+    @Nullable
+    private ObjectId contactId;
 }

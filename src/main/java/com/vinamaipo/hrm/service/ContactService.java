@@ -44,12 +44,13 @@ public class ContactService {
 
     @Transactional
     public ContactView delete(ObjectId id) {
-        var contact = contactRepo.getById(id);
-
-        contactRepo.delete(contact);
-        addressRepo.deleteAll(addressRepo.findAllById(contact.getAddressIds()));
-
-        return contactViewMapper.toContactView(contact);
+//        var contact = contactRepo.getById(id);
+//
+//        contactRepo.delete(contact);
+//        addressRepo.deleteAll(addressRepo.findAllById(contact.getAddressIds()));
+//
+//        return contactViewMapper.toContactView(contact);
+        return null;
     }
 
     public ContactView getContact(ObjectId id) {
@@ -61,8 +62,9 @@ public class ContactService {
     }
 
     public List<ContactView> getAddressContacts(ObjectId addressId) {
-        var address = addressRepo.getById(addressId);
-        return contactViewMapper.toContactView(contactRepo.findAllById(address.getContactIds()));
+//        var address = addressRepo.getById(addressId);
+//        return contactViewMapper.toContactView(contactRepo.findAllById(address.getContactIds()));
+        return null;
     }
 
     public List<ContactView> searchContacts(Page page, SearchContactsQuery query) {

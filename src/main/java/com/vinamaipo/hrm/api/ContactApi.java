@@ -27,19 +27,19 @@ public class ContactApi {
     private final ContactService contactService;
     private final AddressService addressService;
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
+    @RolesAllowed({Role.USER})
     @PostMapping
     public ContactView create(@RequestBody @Valid EditContactRequest request) {
         return contactService.create(request);
     }
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
+    @RolesAllowed({Role.USER})
     @PutMapping("{id}")
     public ContactView edit(@PathVariable String id, @RequestBody @Valid EditContactRequest request) {
         return contactService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed({Role.CONTACT_ADMIN, Role.USER})
+    @RolesAllowed({Role.USER})
     @DeleteMapping("{id}")
     public ContactView delete(@PathVariable String id) {
         return contactService.delete(new ObjectId(id));

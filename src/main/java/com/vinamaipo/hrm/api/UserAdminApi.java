@@ -19,37 +19,42 @@ import javax.validation.Valid;
 
 @Tag(name = "UserAdmin")
 @RestController @RequestMapping(path = "api/v1/admin/user")
-@RolesAllowed(Role.USER)
 @RequiredArgsConstructor
 public class UserAdminApi {
 
     private final UserService userService;
 
+    @RolesAllowed({Role.USER, Role.ADMIN})
     @PostMapping
     public UserView create(@RequestBody @Valid CreateUserRequest request) {
         return userService.create(request);
     }
 
+    @RolesAllowed(Role.ADMIN)
     @PutMapping("{id}")
     public UserView update(@PathVariable String id, @RequestBody @Valid UpdateUserRequest request) {
         return userService.update(new ObjectId(id), request);
     }
 
+    @RolesAllowed(Role.ADMIN)
     @DeleteMapping("{id}")
     public UserView delete(@PathVariable String id) {
         return userService.delete(new ObjectId(id));
     }
 
+    @RolesAllowed({Role.USER, Role.ADMIN})
     @GetMapping("{id}")
     public UserView get(@PathVariable String id) {
         return userService.getUser(new ObjectId(id));
     }
 
+    @RolesAllowed({Role.USER,Role.ADMIN})
     @PostMapping("search")
     public ListResponse<UserView> search(@RequestBody SearchRequest<SearchUsersQuery> request) {
         return new ListResponse<>(userService.searchUsers(request.getPage(), request.getQuery()));
     }
 
+    @RolesAllowed({Role.USER, Role.ADMIN})
     @GetMapping("all")
     public ListResponse<UserView> getAllUsers() {
         return new ListResponse<>(userService.searchUsers(new Page()));

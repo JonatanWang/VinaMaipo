@@ -1,9 +1,6 @@
 package com.vinamaipo.hrm.service;
 
-import com.vinamaipo.hrm.domain.dto.AddressView;
-import com.vinamaipo.hrm.domain.dto.EditAddressRequest;
-import com.vinamaipo.hrm.domain.dto.Page;
-import com.vinamaipo.hrm.domain.dto.SearchAddressesQuery;
+import com.vinamaipo.hrm.domain.dto.*;
 import com.vinamaipo.hrm.domain.mapper.AddressEditMapper;
 import com.vinamaipo.hrm.domain.mapper.AddressViewMapper;
 import com.vinamaipo.hrm.domain.model.Address;
@@ -50,9 +47,9 @@ public class AddressService {
     }
 
     private void updateContacts(Address address) {
-        List<Contact> contacts = contactRepo.findAllById(address.getContactIds());
-        contacts.forEach(c -> c.getAddressIds().add(address.getId()));
-        contactRepo.saveAll(contacts);
+//        List<Contact> contacts = contactRepo.findAllById(address.getContactIds());
+//        contacts.forEach(c -> c.getAddressIds().add(address.getId()));
+//        contactRepo.saveAll(contacts);
     }
 
     @Transactional
@@ -75,8 +72,9 @@ public class AddressService {
     }
 
     public List<AddressView> getContactAddresses(ObjectId authorId) {
-        var contact = contactRepo.getById(authorId);
-        return addressViewMapper.toAddressView(addressRepo.findAllById(contact.getAddressIds()));
+//        var contact = contactRepo.getById(authorId);
+//        return addressViewMapper.toAddressView(addressRepo.findAllById(contact.getAddressIds()));
+        return null;
     }
 
     public List<AddressView> searchAddresses(Page page, SearchAddressesQuery query) {

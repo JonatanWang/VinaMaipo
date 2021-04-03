@@ -29,8 +29,8 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
     );
     private final List<String> roles = List.of(
             Role.USER,
-            Role.CONTACT_ADMIN,
-            Role.ADDRESS_ADMIN
+            Role.USER,
+            Role.USER
     );
 
     private final String password = "aaaaaa";
