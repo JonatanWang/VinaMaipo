@@ -12,6 +12,8 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -71,11 +73,10 @@ public class AddressService {
         return addressViewMapper.toAddressView(addresses);
     }
 
-    public List<AddressView> getContactAddresses(ObjectId authorId) {
-//        var contact = contactRepo.getById(authorId);
-//        return addressViewMapper.toAddressView(addressRepo.findAllById(contact.getAddressIds()));
-        return null;
-    }
+    public List<AddressView> getContactAddresses(ObjectId contactId) {
+        var contact = contactRepo.getById(contactId);
+        return addressViewMapper.toAddressView(addressRepo.findAllById(Collections.singleton(contactId)));
+}
 
     public List<AddressView> searchAddresses(Page page, SearchAddressesQuery query) {
 

@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Document(collection = "adresses")
+@Document(collection = "addresses")
 public class Address implements Serializable {
 
     @Id

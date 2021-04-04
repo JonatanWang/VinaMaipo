@@ -33,7 +33,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             Role.USER
     );
 
-    private final String password = "aaaaaa";
+    private final String password = "string";
 
     private final UserService userService;
 
