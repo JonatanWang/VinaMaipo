@@ -39,7 +39,7 @@ public class AddressService {
         addressEditMapper.update(request, address);
 
         address = addressRepo.save(address);
-        if (!CollectionUtils.isEmpty(request.getContactIds())) {
+        if (request.getContactId() != null) {
             updateContacts(address);
         }
 

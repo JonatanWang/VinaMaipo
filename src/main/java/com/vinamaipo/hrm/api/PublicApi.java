@@ -12,6 +12,6 @@ public class PublicApi {
 
     @GetMapping
     public String defaultView() {
-        return "Welcome to VinaMaipo!";
+        return "Welcome to Vina Maipo!";
     }
 }

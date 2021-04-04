@@ -13,25 +13,23 @@ import javax.validation.Valid;
 
 @Tag(name = "Address")
 @RestController @RequestMapping(path = "api/v1/address")
+@RolesAllowed({Role.USER, Role.ADMIN})
 @RequiredArgsConstructor
 public class AddressApi {
 
     private final AddressService addressService;
     private final ContactService contactService;
 
-    @RolesAllowed({Role.USER})
     @PostMapping
     public AddressView create(@RequestBody @Valid EditAddressRequest request) {
         return addressService.create(request);
     }
 
-    @RolesAllowed({Role.USER})
     @PutMapping("{id}")
     public AddressView edit(@PathVariable String id, @RequestBody @Valid EditAddressRequest request) {
         return addressService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed({Role.USER})
     @DeleteMapping("{id}")
     public AddressView delete(@PathVariable String id) {
         return addressService.delete(new ObjectId(id));
@@ -43,7 +41,7 @@ public class AddressApi {
     }
 
     @GetMapping("{id}/contact")
-    public ListResponse<ContactView> getAuthors(@PathVariable String id) {
+    public ListResponse<ContactView> getContacts(@PathVariable String id) {
         return new ListResponse<>(contactService.getAddressContacts(new ObjectId(id)));
     }
 

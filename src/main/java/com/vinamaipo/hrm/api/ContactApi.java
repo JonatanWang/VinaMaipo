@@ -15,31 +15,28 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Tag(name = "Contact")
 @RestController @RequestMapping(path = "api/v1/contact")
+@RolesAllowed({Role.USER, Role.ADMIN})
 @RequiredArgsConstructor
 public class ContactApi {
 
     private final ContactService contactService;
     private final AddressService addressService;
 
-    @RolesAllowed({Role.USER})
     @PostMapping
     public ContactView create(@RequestBody @Valid EditContactRequest request) {
         return contactService.create(request);
     }
 
-    @RolesAllowed({Role.USER})
     @PutMapping("{id}")
     public ContactView edit(@PathVariable String id, @RequestBody @Valid EditContactRequest request) {
         return contactService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed({Role.USER})
     @DeleteMapping("{id}")
     public ContactView delete(@PathVariable String id) {
         return contactService.delete(new ObjectId(id));

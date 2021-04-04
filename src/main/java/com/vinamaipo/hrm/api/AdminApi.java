@@ -17,44 +17,39 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
-@Tag(name = "UserAdmin")
+@Tag(name = "Admin")
+@RolesAllowed({Role.ADMIN})
 @RestController @RequestMapping(path = "api/v1/admin/user")
 @RequiredArgsConstructor
-public class UserAdminApi {
+public class AdminApi {
 
     private final UserService userService;
 
-    @RolesAllowed({Role.USER, Role.ADMIN})
     @PostMapping
     public UserView create(@RequestBody @Valid CreateUserRequest request) {
         return userService.create(request);
     }
 
-    @RolesAllowed(Role.ADMIN)
     @PutMapping("{id}")
     public UserView update(@PathVariable String id, @RequestBody @Valid UpdateUserRequest request) {
         return userService.update(new ObjectId(id), request);
     }
 
-    @RolesAllowed(Role.ADMIN)
     @DeleteMapping("{id}")
     public UserView delete(@PathVariable String id) {
         return userService.delete(new ObjectId(id));
     }
 
-    @RolesAllowed({Role.USER, Role.ADMIN})
     @GetMapping("{id}")
     public UserView get(@PathVariable String id) {
         return userService.getUser(new ObjectId(id));
     }
 
-    @RolesAllowed({Role.USER,Role.ADMIN})
     @PostMapping("search")
     public ListResponse<UserView> search(@RequestBody SearchRequest<SearchUsersQuery> request) {
         return new ListResponse<>(userService.searchUsers(request.getPage(), request.getQuery()));
     }
 
-    @RolesAllowed({Role.USER, Role.ADMIN})
     @GetMapping("all")
     public ListResponse<UserView> getAllUsers() {
         return new ListResponse<>(userService.searchUsers(new Page()));

@@ -1,6 +1,8 @@
 package com.vinamaipo.hrm.domain.dto;
 
 import lombok.Data;
+import org.bson.types.ObjectId;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 @Data
 public class EditAddressRequest {
 
-    private List<@NotNull String> contactIds;
+    private ObjectId contactId;
 
     @NotBlank
     private String street;
@@ -17,4 +19,5 @@ public class EditAddressRequest {
     private String city;
     private String province;
     private String country;
+
 }

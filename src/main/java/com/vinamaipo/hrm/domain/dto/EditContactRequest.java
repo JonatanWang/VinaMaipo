@@ -13,6 +13,6 @@ public class EditContactRequest {
     @NotNull
     private String name;
 
-    @Nullable
-    private Set<ObjectId> addressIds;
+//    @Nullable
+//    private Set<ObjectId> addressIds;
 }
