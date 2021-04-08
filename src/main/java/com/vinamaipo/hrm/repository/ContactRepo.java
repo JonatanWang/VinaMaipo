@@ -39,6 +39,7 @@ interface ContactRepoCustom {
 
     List<Contact> searchContacts(Page page, SearchContactsQuery query);
     List<Contact> searchContacts(Page page);
+    List<Contact> findByUserId(ObjectId userId);
 }
 
 @RequiredArgsConstructor
@@ -56,8 +57,8 @@ class ContactRepoCustomImpl implements ContactRepoCustom {
             criteriaList.add(Criteria.where("id").is(new ObjectId(query.getId())));
         }
 
-        if (!StringUtils.containsWhitespace(query.getCreatorId())) {
-            criteriaList.add(Criteria.where("creatorId").is(new ObjectId(query.getCreatorId())));
+        if (!StringUtils.containsWhitespace(query.getUserId())) {
+            criteriaList.add(Criteria.where("userId").is(new ObjectId(query.getUserId())));
         }
         if (query.getCreatedAtStart() != null) {
             criteriaList.add(Criteria.where("createdAt").gte(query.getCreatedAtStart()));
@@ -116,4 +117,24 @@ class ContactRepoCustomImpl implements ContactRepoCustom {
 
         return results.getMappedResults();
     }
+
+    @Override
+    public List<Contact> findByUserId(ObjectId userId){
+        var page = new Page();
+        var operations = new ArrayList<AggregationOperation>();
+        var criteriaList = new ArrayList<Criteria>();
+
+        criteriaList.add(Criteria.where("userId").is(userId));
+        Criteria contactCriteria = new Criteria().andOperator(criteriaList.toArray(new Criteria[0]));
+        operations.add(match(contactCriteria));
+
+        operations.add(sort(Sort.Direction.DESC, "createdAt"));
+        operations.add(skip((page.getNumber() - 1) * page.getLimit()));
+        operations.add(limit(page.getLimit()));
+
+        TypedAggregation<Contact> aggregation = newAggregation(Contact.class, operations);
+        AggregationResults<Contact> results = mongoTemplate.aggregate(aggregation, Contact.class);
+
+        return results.getMappedResults();
+    };
 }

@@ -8,10 +8,14 @@ import com.vinamaipo.hrm.domain.mapper.ContactEditMapper;
 import com.vinamaipo.hrm.domain.mapper.ContactViewMapper;
 import com.vinamaipo.hrm.repository.AddressRepo;
 import com.vinamaipo.hrm.repository.ContactRepo;
+import com.vinamaipo.hrm.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,6 +24,7 @@ public class ContactService {
 
     private final ContactRepo contactRepo;
     private final AddressRepo addressRepo;
+    private final UserRepo userRepo;
     private final ContactEditMapper contactEditMapper;
     private final ContactViewMapper contactViewMapper;
 
@@ -62,9 +67,9 @@ public class ContactService {
     }
 
     public List<ContactView> getAddressContacts(ObjectId addressId) {
-//        var address = addressRepo.getById(addressId);
-//        return contactViewMapper.toContactView(contactRepo.findAllById(address.getContactIds()));
-        return null;
+        var address = addressRepo.getById(addressId);
+        return contactViewMapper.toContactView(contactRepo.findAllById(new ArrayList<>(Collections.singleton(address.getContactId()))));
+
     }
 
     public List<ContactView> searchContacts(Page page, SearchContactsQuery query) {
@@ -75,6 +80,11 @@ public class ContactService {
     public List<ContactView> searchContacts(Page page) {
 
         return contactViewMapper.toContactView(contactRepo.searchContacts(page));
+    }
+
+    public List<ContactView> getUserContacts(ObjectId userId) {
+
+        return contactViewMapper.toContactView(contactRepo.findByUserId(userId));
     }
 }
 

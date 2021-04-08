@@ -75,7 +75,7 @@ public class AddressService {
 
     public List<AddressView> getContactAddresses(ObjectId contactId) {
         var contact = contactRepo.getById(contactId);
-        return addressViewMapper.toAddressView(addressRepo.findAllById(Collections.singleton(contactId)));
+        return addressViewMapper.toAddressView(addressRepo.findAllById(List.of(new ObjectId("60699efa574fc06cb4325e8c"))));
 }
 
     public List<AddressView> searchAddresses(Page page, SearchAddressesQuery query) {

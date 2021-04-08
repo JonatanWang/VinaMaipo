@@ -17,7 +17,7 @@ public class Contact implements Serializable {
     private ObjectId id;
 
     @CreatedBy
-    private ObjectId creatorId;
+    private ObjectId userId;
     @LastModifiedBy
     private ObjectId modifierId;
     @CreatedDate

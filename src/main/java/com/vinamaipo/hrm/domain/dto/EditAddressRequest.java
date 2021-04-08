@@ -2,10 +2,7 @@ package com.vinamaipo.hrm.domain.dto;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 public class EditAddressRequest {
